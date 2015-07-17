@@ -5,7 +5,11 @@ namespace DForm
 {
     public class CompositeQuestion : QuestionBase
     {
-        private List<QuestionBase> _topics = new List<QuestionBase>();
+        private List<QuestionBase> _topics;
 
+        public CompositeQuestion()
+        {
+            _topics = new List<QuestionBase>();
+        }
     }
 }

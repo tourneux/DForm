@@ -7,14 +7,14 @@ namespace DForm
 {
     public class Questions : QuestionBase
     {
-        readonly Form _form;
+        readonly internal Form _form;
         private string title;
         private int _currentIndex;
 
-        public Questions( Form form ) : base()
+        public Questions( Form form ) : base( form )
         {
             _form = form;
-            title = form.Title;
+            Title = form.Title;
         }
 
         public Boolean Contains(QuestionBase questionBase)
@@ -34,12 +34,12 @@ namespace DForm
             }
         }
 
-        public override QuestionBase AddNewQuestion( string type ) 
+        public QuestionBase AddNewQuestion( string type ) 
         {
             return AddNewQuestion( Type.GetType( type ) );
         }
 
-        public override QuestionBase AddNewQuestion( Type t )
+        public QuestionBase AddNewQuestion( Type t )
         {
             if( !typeof( QuestionBase ).IsAssignableFrom( t ) ) throw new ArgumentException( "The type Must be a QuestionBase" );
             QuestionBase qb = (QuestionBase)Activator.CreateInstance( t );
@@ -51,19 +51,20 @@ namespace DForm
 
 
         public override Form Form {
-            get { return _form; } 
+            get { return _form; }
         }
         
         public new string Title
         {
             get { return title; }
             set 
-            { 
+            {
                 title = value;
-                this._form.Title = value;
+
+                if( value != null ) {
+                    this._form.Title = value;
+                }
             }
         }
-
-        
     }
 }

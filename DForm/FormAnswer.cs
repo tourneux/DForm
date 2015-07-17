@@ -25,6 +25,7 @@ namespace DForm
             anwserBase.Title = questionBase.Title;
             anwserBase.Index = questionBase.Index;
             anwserBase.Parent = questionBase.Parent;
+            questionBase.AddAnswer( anwserBase );
             return anwserBase;
         }
 

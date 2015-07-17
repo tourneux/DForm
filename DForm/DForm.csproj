@@ -63,13 +63,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnswerBase.cs" />
-    <Compile Include="Answers.cs" />
     <Compile Include="BooleanQuestion.cs" />
     <Compile Include="CivilStatus.cs" />
     <Compile Include="CompositeQuestion.cs" />
     <Compile Include="Form.cs" />
     <Compile Include="FormAnswer.cs" />
     <Compile Include="ITitle.cs" />
+    <Compile Include="BooleanAnswer.cs" />
     <Compile Include="OpenAnswer.cs" />
     <Compile Include="OpenQuestion.cs" />
     <Compile Include="QuestionBase.cs" />

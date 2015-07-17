@@ -5,14 +5,20 @@ namespace DForm
 {
     public abstract class QuestionBase : ITitle
     {
-        readonly Form _form;
+        private Form _form;
         private string _title;
         private int _index;
         private QuestionBase _parent;
-        readonly Dictionary<QuestionBase, AnswerBase> dictionary;
+        readonly internal Dictionary<QuestionBase, AnswerBase> dictionary;
 
         public QuestionBase( )
         {
+            dictionary = new Dictionary<QuestionBase, AnswerBase>();
+        }
+
+        public QuestionBase( Form form )
+        {
+            _form = form;
             dictionary = new Dictionary<QuestionBase, AnswerBase>();
         }
 
@@ -21,11 +27,12 @@ namespace DForm
             get { return _index; }
             set
             {
-                if( this._parent != null &&  this._parent.dictionary != null && this._parent.dictionary.Count > 0 )
+                if( this._parent != null && this._parent.Dictionary != null && this._parent.Dictionary.Count > 0 )
                 {
+                    Dictionary<QuestionBase,AnswerBase> dictionaryParent = _parent.Dictionary;
                     if ( value == -1 )
                     {
-                        foreach( var qBase in _parent.dictionary.Keys )
+                        foreach( var qBase in dictionaryParent.Keys )
                         {
                             if( qBase._index > this._index )
                             {
@@ -39,7 +46,7 @@ namespace DForm
                     }
                     else if( _index > value )
                     {
-                        foreach( var qBase in _parent.dictionary.Keys )
+                        foreach( var qBase in dictionaryParent.Keys )
                         {
                             if( qBase._index >= value && qBase._index < this._index )
                             {
@@ -53,7 +60,7 @@ namespace DForm
                     }
                     else
                     {
-                        foreach( var qBase in _parent.dictionary.Keys )
+                        foreach( var qBase in dictionaryParent.Keys )
                         {
                             if( qBase._index >= this._index && qBase._index < value )
                             {
@@ -68,7 +75,21 @@ namespace DForm
                 }
                 else
                 {
-                    _index = value;
+                    if( value == -2 )
+                    {
+                        if( this._parent.Dictionary.Count == 0 )
+                        {
+                            _index = 0;
+                        }
+                        else
+                        {
+                            _index = this._parent.Dictionary.Count;
+                        }
+                    }
+                    else 
+                    {
+                        _index = value;
+                    }
                 }
             }
         }
@@ -85,7 +106,12 @@ namespace DForm
                 }
                 else
                 {
-                    _parent = value; 
+                    _parent = value;
+
+                    if( value.Form == null )
+                    {
+                        Index = -2;
+                    }
                 }
             }
         }
@@ -101,19 +127,9 @@ namespace DForm
             set { _title = value;  }
         }
 
-        public virtual QuestionBase AddNewQuestion( string type )
-        {
-            return AddNewQuestion( Type.GetType( type ) );
-        }
+        //public abstract QuestionBase AddNewQuestion( string type );
 
-        public virtual QuestionBase AddNewQuestion( Type t )
-        {
-            if( !typeof( QuestionBase ).IsAssignableFrom( t ) ) throw new ArgumentException( "The type Must be a QuestionBase" );
-            QuestionBase qb = (QuestionBase)Activator.CreateInstance( t );
-            qb.Parent = this;
-            dictionary.Add( qb, null );
-            return qb;
-        }
+        //public abstract QuestionBase AddNewQuestion( Type t );
 
         public Dictionary<QuestionBase, AnswerBase> Dictionary
         {
@@ -132,6 +148,11 @@ namespace DForm
                 }
             }
             return null;
+        }
+
+        public void AddAnswer( AnswerBase answerBase )
+        {
+            this.Parent.Dictionary[this] = answerBase;
         }
     }
 }

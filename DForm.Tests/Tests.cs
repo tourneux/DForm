@@ -39,8 +39,10 @@ namespace DForm.Tests
             f.Questions.Title = "HG67-Bis";
             Assert.AreEqual( "HG67-Bis", f.Title );
 
-            QuestionBase q1 = f.Questions.AddNewQuestion( "DForm.CompositeQuestion,DForm" );
-            QuestionBase q2 = f.Questions.AddNewQuestion( typeof( CompositeQuestion ) );
+            //QuestionBase q1 = f.Questions.AddNewQuestion( "DForm.CompositeQuestion,DForm" );
+            //QuestionBase q2 = f.Questions.AddNewQuestion( typeof( CompositeQuestion ) );
+            QuestionBase q1 = f.Questions.AddNewQuestion( "DForm.OpenQuestion,DForm" );
+            QuestionBase q2 = f.Questions.AddNewQuestion( typeof( OpenQuestion ) );
             Assert.AreEqual( 0, q1.Index );
             Assert.AreEqual( 1, q2.Index );
             q2.Index = 0;
@@ -49,6 +51,7 @@ namespace DForm.Tests
             q2.Parent = null;
             Assert.AreEqual( 0, q1.Index );
             q2.Parent = q1;
+            Assert.AreEqual( 0, q2.Index );
             Assert.IsTrue( f.Questions.Contains( q1 ) );
             Assert.IsTrue( f.Questions.Contains( q2 ) );
         }
@@ -72,6 +75,28 @@ namespace DForm.Tests
 
             OpenAnswer emilieAnswer = (OpenAnswer)theAnswerOfEmilieToQOpen;
             emilieAnswer.FreeAnswer = "I am very happy to be here";
+
+
+            BooleanQuestion qBool = (BooleanQuestion)f.Questions.AddNewQuestion( typeof( BooleanQuestion ) );
+            qBool.Title = "Second Question in the world!";
+            qBool.AllowEmptyAnswer = false;
+
+            AnswerBase theAnswerOfEmilieToQBoolean = a.FindAnswer( qBool );
+            if( theAnswerOfEmilieToQBoolean == null )
+            {
+                theAnswerOfEmilieToQBoolean = a.AddAnswerFor( qBool );
+            }
+            Assert.IsInstanceOf( typeof( BooleanAnswer ), theAnswerOfEmilieToQBoolean );
+
+            BooleanAnswer emilieAnswerBool = (BooleanAnswer)theAnswerOfEmilieToQBoolean;
+            emilieAnswerBool.BoolAnswer = true;
+
+            Assert.IsTrue( emilieAnswerBool.BoolAnswer );
+
+            qBool.Parent = qOpen;
+            Assert.AreEqual( 0, qOpen.Index );
+            Assert.AreEqual( 0, qBool.Index );
+            Assert.IsTrue( f.Questions.Contains( qBool ) );
         }
     }
 }
