@@ -43,8 +43,7 @@ namespace DForm
             QuestionBase qb = (QuestionBase)Activator.CreateInstance( t );
             qb.Index = _currentIndex++;
             qb.Parent = this;
-            FormAnswer fo = this.Form.FindOrCreateAnswer( this.Form.Title );
-            fo.Add( qb, null );
+            this.Form.FindOrCreateAnswer( this.Form.Title ).Add( qb, null );
             return qb;
             //return (QuestionBase)Activator.CreateInstance( t, _currentIndex, this );
         }

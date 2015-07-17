@@ -23,7 +23,13 @@ namespace DForm
         public int Index
         {
             get { return _index; }
-            set { _index = value; }
+            set
+            {
+                if( _index != 0) {
+
+                } 
+                _index = value;
+            }
         }
 
         public QuestionBase Parent
@@ -37,18 +43,20 @@ namespace DForm
                 }
                 else
                 {
-                    if( value._child == null )
+                    if( typeof( Questions ) != value.GetType() )
                     {
-                        value._child = new List<QuestionBase>();
-                        Index = 0;
-                    } 
-                    else
-                    {
-                        Index = value._child.Count;
+                        if( value._child == null )
+                        {
+                            value._child = new List<QuestionBase>();
+                            Index = 0;
+                        }
+                        else
+                        {
+                            Index = value._child.Count;
+                        }
+                        value._child.Add( this );
                     }
-                    value._child.Add( this );
                 }
-                Index = 0; //////   A faire !!!!!
                 _parent = value;
             }
         }

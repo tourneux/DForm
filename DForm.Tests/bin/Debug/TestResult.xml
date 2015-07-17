@@ -1,22 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm.Tests\bin\Debug\DForm.Tests.dll" total="1" errors="0" failures="1" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2015-07-17" time="10:14:45">
+<test-results name="C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm.Tests\bin\Debug\DForm.Tests.dll" total="1" errors="0" failures="1" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2015-07-17" time="11:08:12">
   <environment nunit-version="2.6.4.14350" clr-version="4.0.30319.34209" os-version="Microsoft Windows NT 6.1.7601 Service Pack 1" platform="Win32NT" cwd="C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm.Tests\bin\Debug" machine-name="HAPLO-PC" user="Haplo" user-domain="Haplo-PC" />
   <culture-info current-culture="fr-FR" current-uiculture="fr-FR" />
-  <test-suite type="Assembly" name="C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm.Tests\bin\Debug\DForm.Tests.dll" executed="True" result="Failure" success="False" time="16.306" asserts="0">
+  <test-suite type="Assembly" name="C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm.Tests\bin\Debug\DForm.Tests.dll" executed="True" result="Failure" success="False" time="121.129" asserts="0">
     <results>
-      <test-suite type="Namespace" name="DForm" executed="True" result="Failure" success="False" time="16.293" asserts="0">
+      <test-suite type="Namespace" name="DForm" executed="True" result="Failure" success="False" time="121.093" asserts="0">
         <results>
-          <test-suite type="Namespace" name="Tests" executed="True" result="Failure" success="False" time="16.293" asserts="0">
+          <test-suite type="Namespace" name="Tests" executed="True" result="Failure" success="False" time="121.067" asserts="0">
             <results>
-              <test-suite type="TestFixture" name="Tests" executed="True" result="Failure" success="False" time="16.292" asserts="0">
+              <test-suite type="TestFixture" name="Tests" executed="True" result="Failure" success="False" time="121.031" asserts="0">
                 <results>
-                  <test-case name="DForm.Tests.Tests.CreateQuestions" executed="True" result="Failure" success="False" time="16.279" asserts="3">
+                  <test-case name="DForm.Tests.Tests.CreateQuestions" executed="True" result="Failure" success="False" time="120.989" asserts="5">
                     <failure>
                       <message><![CDATA[  Expected: 1
   But was:  0
 ]]></message>
-                      <stack-trace><![CDATA[à DForm.Tests.Tests.CreateQuestions() dans c:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm.Tests\Tests.cs:ligne 45
+                      <stack-trace><![CDATA[à DForm.Tests.Tests.CreateQuestions() dans c:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm.Tests\Tests.cs:ligne 48
 ]]></stack-trace>
                     </failure>
                   </test-case>
