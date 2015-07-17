@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DForm", "DForm\DForm.csproj", "{9836D5A7-B50A-4397-B8DD-AD6ABC40EFD1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DForm.Tests", "DForm.Tests\DForm.Tests.csproj", "{8BE78604-0AA7-4981-B8DF-B9F114A48AE6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9836D5A7-B50A-4397-B8DD-AD6ABC40EFD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9836D5A7-B50A-4397-B8DD-AD6ABC40EFD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9836D5A7-B50A-4397-B8DD-AD6ABC40EFD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9836D5A7-B50A-4397-B8DD-AD6ABC40EFD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BE78604-0AA7-4981-B8DF-B9F114A48AE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BE78604-0AA7-4981-B8DF-B9F114A48AE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BE78604-0AA7-4981-B8DF-B9F114A48AE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BE78604-0AA7-4981-B8DF-B9F114A48AE6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
