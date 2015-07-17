@@ -7,7 +7,6 @@ namespace DForm
     {
         private string _uniqueName;
         private Form Form;
-        private Dictionary<QuestionBase, AnswerBase> dictionary;
 
         public FormAnswer( string answerTitle, Form form )
         {
@@ -17,6 +16,7 @@ namespace DForm
     
         public AnswerBase FindAnswer( QuestionBase questionBase)
         {
+            Dictionary<QuestionBase, AnswerBase> dictionary = questionBase.Parent.dictionary;
             foreach( KeyValuePair<QuestionBase, AnswerBase> entry in dictionary )
             {
                 if(entry.Key == questionBase)
@@ -33,14 +33,5 @@ namespace DForm
             set { _uniqueName = value; }
         }
 
-        public void Add(QuestionBase questionBase, AnswerBase answerBase)
-        {
-            if( questionBase == null ) throw new ArgumentNullException();
-            if( dictionary == null) 
-            {
-                dictionary = new Dictionary<QuestionBase, AnswerBase>();
-            } 
-            dictionary.Add( questionBase, answerBase );
-        }
     }
 }

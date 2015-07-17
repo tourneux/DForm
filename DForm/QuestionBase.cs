@@ -9,26 +9,51 @@ namespace DForm
         private string _title;
         private int _index;
         private QuestionBase _parent;
-        private List<QuestionBase> _child;
+        public Dictionary<QuestionBase, AnswerBase> dictionary;
 
         public QuestionBase( )
         { }
-
-        //public QuestionBase( int index, QuestionBase question )
-        //{
-        //    _index = index--;
-        //    Parent = question;
-        //}
 
         public int Index
         {
             get { return _index; }
             set
             {
-                if( _index != 0) {
-
-                } 
-                _index = value;
+                if( _parent != null &&  _parent.dictionary != null && _parent.dictionary.Count > 0 )
+                {
+                    if( _index > value )
+                    {
+                        foreach( var qBase in _parent.dictionary.Keys )
+                        {
+                            if( qBase.Index >= value && qBase.Index < this._index )
+                            {
+                                qBase.Index++;
+                            }
+                            if( qBase.Index == this._index )
+                            {
+                                qBase.Index = value;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        foreach( var qBase in _parent.dictionary.Keys )
+                        {
+                            if( qBase.Index >= this._index && qBase.Index < value )
+                            {
+                                qBase.Index--;
+                            }
+                            if( qBase.Index == this._index )
+                            {
+                                qBase.Index = value;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    _index = value;
+                }
             }
         }
 
@@ -45,16 +70,16 @@ namespace DForm
                 {
                     if( typeof( Questions ) != value.GetType() )
                     {
-                        if( value._child == null )
+                        if( value.dictionary == null )
                         {
-                            value._child = new List<QuestionBase>();
+                            value.dictionary = new Dictionary<QuestionBase,AnswerBase>();
                             Index = 0;
                         }
                         else
                         {
-                            Index = value._child.Count;
+                            Index = value.dictionary.Count;
                         }
-                        value._child.Add( this );
+                        value.dictionary.Add( this, null );
                     }
                 }
                 _parent = value;
@@ -71,5 +96,20 @@ namespace DForm
             get { return _title; }
             set { _title = value;  }
         }
+
+        public virtual QuestionBase AddNewQuestion( string type )
+        {
+            return AddNewQuestion( Type.GetType( type ) );
+        }
+
+        public virtual QuestionBase AddNewQuestion( Type t )
+        {
+            if( !typeof( QuestionBase ).IsAssignableFrom( t ) ) throw new ArgumentException( "The type Must be a QuestionBase" );
+            QuestionBase qb = (QuestionBase)Activator.CreateInstance( t );
+            qb.Parent = this;
+            dictionary.Add( qb, null );
+            return qb;
+        }
+
     }
 }
