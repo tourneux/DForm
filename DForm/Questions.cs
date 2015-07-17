@@ -10,12 +10,11 @@ namespace DForm
         readonly Form _form;
         private string title;
         private int _currentIndex;
-        private Dictionary<QuestionBase, AnswerBase> dictionary;
 
-        public Questions( Form form )
+        public Questions( Form form ) : base()
         {
             _form = form;
-            dictionary = new Dictionary<QuestionBase, AnswerBase>();
+            title = form.Title;
         }
 
         public Boolean Contains(QuestionBase questionBase)
@@ -36,6 +35,14 @@ namespace DForm
 
         public override QuestionBase AddNewQuestion( string type ) 
         {
+            //Type t = Type.GetType( type );
+
+            //if( !typeof( QuestionBase ).IsAssignableFrom( t ) ) throw new ArgumentException( "The type Must be a QuestionBase" );
+            //QuestionBase qb = (QuestionBase)Activator.CreateInstance( t );
+            //qb.Index = _currentIndex++;
+            //this.dictionary.Add( qb, null );
+            //qb.Parent = this;
+            //return qb;
             return AddNewQuestion( Type.GetType( type ) );
         }
 
@@ -44,8 +51,8 @@ namespace DForm
             if( !typeof( QuestionBase ).IsAssignableFrom( t ) ) throw new ArgumentException( "The type Must be a QuestionBase" );
             QuestionBase qb = (QuestionBase)Activator.CreateInstance( t );
             qb.Index = _currentIndex++;
+            this.Dictionary.Add( qb, null );
             qb.Parent = this;
-            dictionary.Add( qb, null );
             return qb;
         }
 
@@ -63,5 +70,7 @@ namespace DForm
                 this._form.Title = value;
             }
         }
+
+        
     }
 }

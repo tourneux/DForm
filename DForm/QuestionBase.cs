@@ -9,17 +9,19 @@ namespace DForm
         private string _title;
         private int _index;
         private QuestionBase _parent;
-        public Dictionary<QuestionBase, AnswerBase> dictionary;
+        readonly Dictionary<QuestionBase, AnswerBase> dictionary;
 
         public QuestionBase( )
-        { }
+        {
+            dictionary = new Dictionary<QuestionBase, AnswerBase>();
+        }
 
         public int Index
         {
             get { return _index; }
             set
             {
-                if( _parent != null &&  _parent.dictionary != null && _parent.dictionary.Count > 0 )
+                if( this._parent != null &&  this._parent.dictionary != null && this._parent.dictionary.Count > 0 )
                 {
                     if( _index > value )
                     {
@@ -28,6 +30,20 @@ namespace DForm
                             if( qBase.Index >= value && qBase.Index < this._index )
                             {
                                 qBase.Index++;
+                            }
+                            if( qBase.Index == this._index )
+                            {
+                                qBase.Index = value;
+                            }
+                        }
+                    }
+                    else if ( value == -1 )
+                    {
+                        foreach( var qBase in _parent.dictionary.Keys )
+                        {
+                            if( qBase.Index > this._index )
+                            {
+                                qBase.Index--;
                             }
                             if( qBase.Index == this._index )
                             {
@@ -65,24 +81,12 @@ namespace DForm
                 if( value == null )
                 {
                     Index = -1;
+                    _parent = null;
                 }
                 else
                 {
-                    if( typeof( Questions ) != value.GetType() )
-                    {
-                        if( value.dictionary == null )
-                        {
-                            value.dictionary = new Dictionary<QuestionBase,AnswerBase>();
-                            Index = 0;
-                        }
-                        else
-                        {
-                            Index = value.dictionary.Count;
-                        }
-                        value.dictionary.Add( this, null );
-                    }
+                    _parent = value; 
                 }
-                _parent = value;
             }
         }
 
@@ -109,6 +113,11 @@ namespace DForm
             qb.Parent = this;
             dictionary.Add( qb, null );
             return qb;
+        }
+
+        public Dictionary<QuestionBase, AnswerBase> Dictionary
+        {
+            get { return dictionary; }
         }
 
     }

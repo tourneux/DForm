@@ -14,16 +14,16 @@ namespace DForm
             Form = form;
         }
     
-        public AnswerBase FindAnswer( QuestionBase questionBase)
+        public AnswerBase FindAnswer( QuestionBase questionBase )
         {
-            Dictionary<QuestionBase, AnswerBase> dictionary = questionBase.Parent.dictionary;
-            foreach( KeyValuePair<QuestionBase, AnswerBase> entry in dictionary )
-            {
-                if(entry.Key == questionBase)
-                {
-                    return entry.Value;
-                }
-            }
+            //Dictionary<QuestionBase, AnswerBase> dictionary = questionBase.Parent.dictionary;
+            //foreach( KeyValuePair<QuestionBase, AnswerBase> entry in dictionary )
+            //{
+            //    if(entry.Key == questionBase)
+            //    {
+            //        return entry.Value;
+            //    }
+            //}
             return null;
         }
 
