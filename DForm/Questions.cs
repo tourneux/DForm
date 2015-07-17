@@ -20,7 +20,8 @@ namespace DForm
         public Boolean Contains(QuestionBase questionBase)
         {
             if( questionBase == null ) throw new ArgumentNullException();
-            if (questionBase == this) {
+            if( questionBase == this || questionBase.Parent.Parent == null )
+            {
                 return true;
             } else {
                 do
@@ -35,14 +36,6 @@ namespace DForm
 
         public override QuestionBase AddNewQuestion( string type ) 
         {
-            //Type t = Type.GetType( type );
-
-            //if( !typeof( QuestionBase ).IsAssignableFrom( t ) ) throw new ArgumentException( "The type Must be a QuestionBase" );
-            //QuestionBase qb = (QuestionBase)Activator.CreateInstance( t );
-            //qb.Index = _currentIndex++;
-            //this.dictionary.Add( qb, null );
-            //qb.Parent = this;
-            //return qb;
             return AddNewQuestion( Type.GetType( type ) );
         }
 
@@ -61,7 +54,7 @@ namespace DForm
             get { return _form; } 
         }
         
-        public string Title
+        public new string Title
         {
             get { return title; }
             set 

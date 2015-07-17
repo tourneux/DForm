@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DForm
 {
-    public abstract class AnswerBase
+    public abstract class AnswerBase : QuestionBase
     {
-        public AnswerBase AddAnswerFor( QuestionBase questionBase )
+        public AnswerBase() : base()
         {
-            return (AnswerBase)Activator.CreateInstance( Type.GetType( (questionBase.GetType().Name).Replace( "([a-zA-Z]+)Question", "$1Answer" ) ) );
+
         }
+
+        
     }
 }

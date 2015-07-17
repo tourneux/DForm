@@ -1,22 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm.Tests\bin\Debug\DForm.Tests.dll" total="1" errors="0" failures="1" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2015-07-17" time="13:25:17">
+<test-results name="C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm.Tests\bin\Debug\DForm.Tests.dll" total="1" errors="1" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2015-07-17" time="17:15:38">
   <environment nunit-version="2.6.4.14350" clr-version="4.0.30319.34209" os-version="Microsoft Windows NT 6.1.7601 Service Pack 1" platform="Win32NT" cwd="C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm.Tests\bin\Debug" machine-name="HAPLO-PC" user="Haplo" user-domain="Haplo-PC" />
   <culture-info current-culture="fr-FR" current-uiculture="fr-FR" />
-  <test-suite type="Assembly" name="C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm.Tests\bin\Debug\DForm.Tests.dll" executed="True" result="Failure" success="False" time="6.074" asserts="0">
+  <test-suite type="Assembly" name="C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm.Tests\bin\Debug\DForm.Tests.dll" executed="True" result="Failure" success="False" time="0.236" asserts="0">
     <results>
-      <test-suite type="Namespace" name="DForm" executed="True" result="Failure" success="False" time="6.038" asserts="0">
+      <test-suite type="Namespace" name="DForm" executed="True" result="Failure" success="False" time="0.224" asserts="0">
         <results>
-          <test-suite type="Namespace" name="Tests" executed="True" result="Failure" success="False" time="6.013" asserts="0">
+          <test-suite type="Namespace" name="Tests" executed="True" result="Failure" success="False" time="0.224" asserts="0">
             <results>
-              <test-suite type="TestFixture" name="Tests" executed="True" result="Failure" success="False" time="5.979" asserts="0">
+              <test-suite type="TestFixture" name="Tests" executed="True" result="Failure" success="False" time="0.223" asserts="0">
                 <results>
-                  <test-case name="DForm.Tests.Tests.CreateQuestions" executed="True" result="Failure" success="False" time="5.938" asserts="5">
+                  <test-case name="DForm.Tests.Tests.LaTotale" executed="True" result="Error" success="False" time="0.210" asserts="0">
                     <failure>
-                      <message><![CDATA[  Expected: 1
-  But was:  0
-]]></message>
-                      <stack-trace><![CDATA[à DForm.Tests.Tests.CreateQuestions() dans c:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm.Tests\Tests.cs:ligne 48
+                      <message><![CDATA[System.MissingMethodException : Le constructeur sur le type 'DForm.OpenAnswer' est introuvable.]]></message>
+                      <stack-trace><![CDATA[à System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture, Object[] activationAttributes, StackCrawlMark& stackMark)
+à System.Activator.CreateInstance(Type type, BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture, Object[] activationAttributes)
+à System.Activator.CreateInstance(Type type, Object[] args)
+à DForm.FormAnswer.AddAnswerFor(QuestionBase questionBase) dans c:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm\FormAnswer.cs:ligne 24
+à DForm.Tests.Tests.LaTotale() dans c:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm.Tests\Tests.cs:ligne 69
 ]]></stack-trace>
                     </failure>
                   </test-case>

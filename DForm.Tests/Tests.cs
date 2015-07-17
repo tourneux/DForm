@@ -66,7 +66,7 @@ namespace DForm.Tests
             AnswerBase theAnswerOfEmilieToQOpen = a.FindAnswer( qOpen );
             if( theAnswerOfEmilieToQOpen == null )
             {
-                theAnswerOfEmilieToQOpen.AddAnswerFor( qOpen );
+                theAnswerOfEmilieToQOpen = a.AddAnswerFor( qOpen );
             }
             Assert.IsInstanceOf( typeof( OpenAnswer ), theAnswerOfEmilieToQOpen );
 

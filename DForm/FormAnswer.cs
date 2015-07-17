@@ -16,15 +16,16 @@ namespace DForm
     
         public AnswerBase FindAnswer( QuestionBase questionBase )
         {
-            //Dictionary<QuestionBase, AnswerBase> dictionary = questionBase.Parent.dictionary;
-            //foreach( KeyValuePair<QuestionBase, AnswerBase> entry in dictionary )
-            //{
-            //    if(entry.Key == questionBase)
-            //    {
-            //        return entry.Value;
-            //    }
-            //}
-            return null;
+            return questionBase.FindAnswer();
+        }
+
+        public AnswerBase AddAnswerFor( QuestionBase questionBase )
+        {
+            AnswerBase anwserBase = (AnswerBase)Activator.CreateInstance( Type.GetType( "DForm." + (questionBase.GetType().Name).Replace( "Question", "Answer" ) + ",DForm" ) );
+            anwserBase.Title = questionBase.Title;
+            anwserBase.Index = questionBase.Index;
+            anwserBase.Parent = questionBase.Parent;
+            return anwserBase;
         }
 
         public string UniqueName

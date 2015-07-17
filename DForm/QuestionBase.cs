@@ -23,31 +23,31 @@ namespace DForm
             {
                 if( this._parent != null &&  this._parent.dictionary != null && this._parent.dictionary.Count > 0 )
                 {
-                    if( _index > value )
+                    if ( value == -1 )
                     {
                         foreach( var qBase in _parent.dictionary.Keys )
                         {
-                            if( qBase.Index >= value && qBase.Index < this._index )
+                            if( qBase._index > this._index )
                             {
-                                qBase.Index++;
+                                qBase._index -= 1;
                             }
-                            if( qBase.Index == this._index )
+                            else if( qBase._index == this._index )
                             {
-                                qBase.Index = value;
+                                qBase._index = value;
                             }
                         }
                     }
-                    else if ( value == -1 )
+                    else if( _index > value )
                     {
                         foreach( var qBase in _parent.dictionary.Keys )
                         {
-                            if( qBase.Index > this._index )
+                            if( qBase._index >= value && qBase._index < this._index )
                             {
-                                qBase.Index--;
+                                qBase._index += 1;
                             }
-                            if( qBase.Index == this._index )
+                            else if( qBase._index == this._index )
                             {
-                                qBase.Index = value;
+                                qBase._index = value;
                             }
                         }
                     }
@@ -55,13 +55,13 @@ namespace DForm
                     {
                         foreach( var qBase in _parent.dictionary.Keys )
                         {
-                            if( qBase.Index >= this._index && qBase.Index < value )
+                            if( qBase._index >= this._index && qBase._index < value )
                             {
-                                qBase.Index--;
+                                qBase._index -= 1;
                             }
-                            if( qBase.Index == this._index )
+                            else if( qBase._index == this._index )
                             {
-                                qBase.Index = value;
+                                qBase._index = value;
                             }
                         }
                     }
@@ -120,5 +120,18 @@ namespace DForm
             get { return dictionary; }
         }
 
+        public AnswerBase FindAnswer()
+        {
+            Dictionary<QuestionBase, AnswerBase> dictionary = this._parent.Dictionary;
+
+            foreach( KeyValuePair<QuestionBase, AnswerBase> entry in dictionary )
+            {
+                if( entry.Key == this )
+                {
+                    return entry.Value;
+                }
+            }
+            return null;
+        }
     }
 }
