@@ -1,0 +1,10 @@
+C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm.Tests\obj\Debug\DForm.Tests.csprojResolveAssemblyReference.cache
+C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm.Tests\bin\Debug\DForm.Tests.dll.config
+C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm.Tests\bin\Debug\DForm.Tests.dll
+C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm.Tests\bin\Debug\DForm.Tests.pdb
+C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm.Tests\bin\Debug\DForm.dll
+C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm.Tests\bin\Debug\nunit.framework.dll
+C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm.Tests\bin\Debug\DForm.pdb
+C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm.Tests\bin\Debug\nunit.framework.xml
+C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm.Tests\obj\Debug\DForm.Tests.dll
+C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm.Tests\obj\Debug\DForm.Tests.pdb

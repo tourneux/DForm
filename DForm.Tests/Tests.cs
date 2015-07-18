@@ -41,6 +41,8 @@ namespace DForm.Tests
 
             QuestionBase q1 = f.Questions.AddNewQuestion( "DForm.CompositeQuestion,DForm" );
             QuestionBase q2 = f.Questions.AddNewQuestion( typeof( CompositeQuestion ) );
+            q1.Title = "q1";
+            q2.Title = "q2";
             Assert.AreEqual( 0, q1.Index );
             Assert.AreEqual( 1, q2.Index );
             q2.Index = 0;
@@ -64,6 +66,7 @@ namespace DForm.Tests
             qOpen.AllowEmptyAnswer = false;
 
             FormAnswer a = f.FindOrCreateAnswer( "Emilie" );
+            Assert.IsNotEmpty( f.ListOfFormAnswer );
             AnswerBase theAnswerOfEmilieToQOpen = a.FindAnswer( qOpen );
             if( theAnswerOfEmilieToQOpen == null )
             {
@@ -96,5 +99,70 @@ namespace DForm.Tests
             Assert.AreEqual( 0, qBool.Index );
             Assert.IsTrue( f.Questions.Contains( qBool ) );
         }
+
+        [Test]
+        public void Blank()
+        {
+            Form f = new Form();
+            f.Title = "Prem's";
+
+            OpenQuestion qOpen = (OpenQuestion)f.Questions.AddNewQuestion( typeof( OpenQuestion ) );
+            qOpen.Title = "First Question in the world!";
+            qOpen.AllowEmptyAnswer = false;
+
+            FormAnswer a = f.FindOrCreateAnswer( "Emilie" );
+            Assert.IsNotEmpty( f.ListOfFormAnswer );
+
+            BooleanQuestion qBool = (BooleanQuestion)f.Questions.AddNewQuestion( typeof( BooleanQuestion ) );
+            qBool.Title = "Second Question in the world!";
+
+            BooleanQuestion q2Bool = (BooleanQuestion)f.Questions.AddNewQuestion( typeof( BooleanQuestion ) );
+            q2Bool.Title = "Third Question in the world!";
+
+            qBool.Parent = qOpen;
+            q2Bool.Parent = qBool;
+            Assert.AreEqual( 0, qOpen.Index );
+            Assert.AreEqual( 0, q2Bool.Index );
+            Assert.IsTrue( f.Questions.Contains( qBool ) );
+
+            Form formBlank = (Form)f.Clone();
+            formBlank.Title = "je suis un clone";
+            Assert.IsEmpty( formBlank.ListOfFormAnswer );
+            Assert.AreNotSame( f, formBlank );
+
+            /* Création des réponses */
+            AnswerBase theAnswerOfEmilieToQOpen = a.FindAnswer( qOpen );
+            if( theAnswerOfEmilieToQOpen == null )
+            {
+                theAnswerOfEmilieToQOpen = a.AddAnswerFor( qOpen );
+            }
+            Assert.IsInstanceOf( typeof( OpenAnswer ), theAnswerOfEmilieToQOpen );
+
+            OpenAnswer emilieAnswer = (OpenAnswer)theAnswerOfEmilieToQOpen;
+            emilieAnswer.FreeAnswer = "I am very happy to be here";
+            //
+            AnswerBase theAnswerOfEmilieToQBool = a.FindAnswer( qBool );
+            if( theAnswerOfEmilieToQBool == null )
+            {
+                theAnswerOfEmilieToQBool = a.AddAnswerFor( qBool );
+            }
+            Assert.IsInstanceOf( typeof( BooleanAnswer ), theAnswerOfEmilieToQBool );
+            BooleanAnswer emilieAnswerBool = (BooleanAnswer)theAnswerOfEmilieToQBool;
+            emilieAnswerBool.BoolAnswer = true;
+            //
+            AnswerBase theAnswerOfEmilieToQBool2 = a.FindAnswer( q2Bool );
+            if( theAnswerOfEmilieToQBool2 == null )
+            {
+                theAnswerOfEmilieToQBool2 = a.AddAnswerFor( q2Bool );
+            }
+            Assert.IsInstanceOf( typeof( BooleanAnswer ), theAnswerOfEmilieToQBool2 );
+
+            BooleanAnswer emilieAnswerBool2 = (BooleanAnswer)theAnswerOfEmilieToQBool2;
+            emilieAnswerBool2.BoolAnswer = false;
+
+            Assert.IsEmpty( formBlank.ListOfFormAnswer );
+            Assert.IsNotEmpty( f.ListOfFormAnswer );
+        }
+
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DForm
 {
-    public class Form : ITitle
+    public class Form : ICloneable, ITitle
     {
         public Questions Questions;
         private List<FormAnswer> _formAnswer;
@@ -37,7 +37,37 @@ namespace DForm
 
         public string Title {
             get { return title; }
-            set { title = value; }
+            set 
+            { 
+                title = value;
+
+                if( Questions != null && Questions.Title == null )
+                {
+                    Questions.Title = value;
+                }
+            }
         }
+
+        public List<FormAnswer> ListOfFormAnswer
+        {
+            get { return _formAnswer; }
+            set
+            {
+                _formAnswer = value;
+            }
+        }
+
+        private object ShallowCopy()
+        {
+            return this.MemberwiseClone();
+        }
+
+        public object Clone()
+        {
+            Form cloned = (Form)this.ShallowCopy();
+            cloned.ListOfFormAnswer = new List<FormAnswer>();
+            return cloned;
+        }
+
     }
 }

@@ -2,9 +2,11 @@
 using System.Web;
 using System.ComponentModel;
 using System.Collections.Generic;
+using System.Data.Linq.Mapping;
 
 namespace DForm
 {
+    [Table( Name = "DVDTable" )]
     public class Questions : QuestionBase
     {
         private string title;
@@ -59,7 +61,7 @@ namespace DForm
             {
                 title = value;
 
-                if( value != null ) {
+                if( value != null && Form.Title == null ) {
                     Form.Title = value;
                 }
             }

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 
 namespace DForm
 {
+    [Serializable]
     public abstract class QuestionBase : ITitle
     {
         private Form _form;
         private string _title;
         private int _index;
         private QuestionBase _parent;
-        readonly internal Dictionary<QuestionBase, AnswerBase> dictionary;
+        readonly Dictionary<QuestionBase, AnswerBase> dictionary;
 
         public QuestionBase( )
         {
@@ -30,6 +31,7 @@ namespace DForm
                 if( this._parent != null && this._parent.Dictionary != null && this._parent.Dictionary.Count > 0 )
                 {
                     Dictionary<QuestionBase,AnswerBase> dictionaryParent = _parent.Dictionary;
+                    
                     if ( value == -1 )
                     {
                         foreach( var qBase in dictionaryParent.Keys )
@@ -86,7 +88,7 @@ namespace DForm
                             _index = this._parent.Dictionary.Count;
                         }
                     }
-                    else 
+                    else
                     {
                         _index = value;
                     }
@@ -107,11 +109,16 @@ namespace DForm
                 else
                 {
                     _parent = value;
-
+                    
                     if( value.Form == null )
                     {
                         Index = -2;
                     }
+                    if( value.Parent != null )
+                    {
+                        CutLinkQuestions();
+                        AddQuestionToParent( value );
+                    } 
                 }
             }
         }
@@ -153,6 +160,22 @@ namespace DForm
         public void AddAnswer( AnswerBase answerBase )
         {
             this.Parent.Dictionary[this] = answerBase;
+        }
+
+        public void AddQuestionToParent( QuestionBase questionBase )
+        {
+            questionBase.Dictionary[this] = null;
+        }
+
+        private void CutLinkQuestions()
+        {
+            QuestionBase qb = this;
+            do
+            {
+                qb = qb.Parent;
+            }
+            while( qb.Parent.Parent != null );
+            qb.Parent.Dictionary.Remove( this );
         }
     }
 }
