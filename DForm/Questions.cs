@@ -7,13 +7,11 @@ namespace DForm
 {
     public class Questions : QuestionBase
     {
-        readonly internal Form _form;
         private string title;
         private int _currentIndex;
 
         public Questions( Form form ) : base( form )
         {
-            _form = form;
             Title = form.Title;
         }
 
@@ -51,7 +49,7 @@ namespace DForm
 
 
         public override Form Form {
-            get { return _form; }
+            get { return base.Form; }
         }
         
         public new string Title
@@ -62,7 +60,7 @@ namespace DForm
                 title = value;
 
                 if( value != null ) {
-                    this._form.Title = value;
+                    Form.Title = value;
                 }
             }
         }
