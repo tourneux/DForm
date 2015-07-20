@@ -26,6 +26,19 @@ namespace DForm
         {
             if( this.dictionaryQuestionAnswer.Count != this.Form.Questions.Dictionary.Count )
             {
+                Dictionary<QuestionBase,AnswerBase> dictionary = this.Form.Questions.Dictionary;
+
+                foreach( KeyValuePair<QuestionBase, AnswerBase> entry in dictionary )
+                {
+                    try
+                    {
+                        this.dictionaryQuestionAnswer.Add( entry.Key, null );
+                    }
+                    catch( ArgumentException )
+                    {
+                        Console.WriteLine( "An element with Key = " + entry.Key + " already exists." );
+                    }
+                }
                 this.dictionaryQuestionAnswer = this.Form.Questions.Dictionary;
             }
             foreach( KeyValuePair<QuestionBase, AnswerBase> entry in dictionaryQuestionAnswer )

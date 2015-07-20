@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml.Linq;
+using System.Linq;
 //using System.Data.Linq.Mapping;
 
 namespace DForm
 {
-    //[Table( Name = "DVDTable" )]
     [Serializable]
     public class Questions : QuestionBase
     {
@@ -74,6 +75,24 @@ namespace DForm
                     Form.Title = value;
                 }
             }
+        }
+
+        public XElement ToXml()
+        {
+            return new XElement( "Questions", new XAttribute( "Title", title ),
+                       new XElement( "NumberOfQuestions", new XAttribute( "Count", Dictionary.Count ),
+                            Dictionary
+                               .OrderBy( i => i.Key.Index )
+                               .Select( i => new XElement( "QuestionBase", i.Key.Title ) ) ) );
+            //return new XElement( "Questions", new XAttribute( "Title", title ),
+            //           new XElement( "NumberOfQuestions", new XAttribute( "Count", Dictionary.Count ),
+            //                Dictionary
+            //                   .OrderBy( i => i.Key.Index )
+            //                   .Select( i => new XElement( "QuestionBase", i.Key.Title ) ) ),
+            //                     new XElement( "QuestionBase", new XAttribute( "Count", Dictionary.Count != 0 ),
+            //                         Dictionary
+            //                            .OrderBy( i => i.Key.Index )
+            //                            .Select( t => new XElement( "QuestionBase", t.Key.Title ) ) ) );
         }
     }
 }

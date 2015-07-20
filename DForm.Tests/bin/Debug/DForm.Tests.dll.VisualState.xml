@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <VisualState xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ShowCheckBoxes="false">
-  <TopNode>[0-1006]C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm.Tests\bin\Debug\DForm.Tests.dll</TopNode>
-  <SelectedNode>[0-1006]C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm.Tests\bin\Debug\DForm.Tests.dll</SelectedNode>
+  <TopNode>[0-1007]C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm.Tests\bin\Debug\DForm.Tests.dll</TopNode>
+  <SelectedNode>[0-1003]DForm.Tests.Tests.LaTotale</SelectedNode>
   <ExcludeCategories>false</ExcludeCategories>
   <Nodes>
-    <Node UniqueName="[0-1006]C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm.Tests\bin\Debug\DForm.Tests.dll" Expanded="true" />
-    <Node UniqueName="[0-1007]DForm" Expanded="true" />
-    <Node UniqueName="[0-1008]DForm.Tests" Expanded="true" />
+    <Node UniqueName="[0-1007]C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm.Tests\bin\Debug\DForm.Tests.dll" Expanded="true" />
+    <Node UniqueName="[0-1008]DForm" Expanded="true" />
+    <Node UniqueName="[0-1009]DForm.Tests" Expanded="true" />
     <Node UniqueName="[0-1000]DForm.Tests.Tests" Expanded="true" />
   </Nodes>
 </VisualState>

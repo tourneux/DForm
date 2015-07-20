@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using DForm;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace DForm.Tests
 {
@@ -236,5 +237,38 @@ namespace DForm.Tests
             Assert.IsNotEmpty( f.ListOfFormAnswer );
         }
 
+
+        [Test]
+        public void Xml()
+        {
+            Form f = new Form();
+            f.Title = "Prem's";
+
+            OpenQuestion qOpen = (OpenQuestion)f.Questions.AddNewQuestion( typeof( OpenQuestion ) );
+            qOpen.Title = "First Question in the world!";
+            qOpen.AllowEmptyAnswer = false;
+
+            FormAnswer a = f.FindOrCreateAnswer( "Emilie" );
+            Assert.IsNotEmpty( f.ListOfFormAnswer );
+
+            BooleanQuestion qBool = (BooleanQuestion)f.Questions.AddNewQuestion( typeof( BooleanQuestion ) );
+            qBool.Title = "Second Question in the world!";
+
+            BooleanQuestion q2Bool = (BooleanQuestion)f.Questions.AddNewQuestion( typeof( BooleanQuestion ) );
+            q2Bool.Title = "Third Question in the world!";
+
+            XElement e = f.Questions.ToXml();
+
+            var result = @"
+                <Questions Title=""Prem's"">
+                    <NumberOfQuestions Count=""3"">
+                        <QuestionBase>First Question in the world!</QuestionBase> 
+                        <QuestionBase>Second Question in the world!</QuestionBase> 
+                        <QuestionBase>Third Question in the world!</QuestionBase> 
+                    </NumberOfQuestions>
+                </Questions>";
+            var eTest = XElement.Parse( result );
+            Assert.That( XElement.DeepEquals( eTest, e ) );
+        }
     }
 }

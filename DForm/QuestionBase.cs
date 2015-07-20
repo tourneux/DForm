@@ -141,20 +141,6 @@ namespace DForm
             get { return dictionary; }
         }
 
-        //public AnswerBase FindAnswer()
-        //{
-        //    Dictionary<QuestionBase, AnswerBase> dictionary = this._parent.Dictionary;
-
-        //    foreach( KeyValuePair<QuestionBase, AnswerBase> entry in dictionary )
-        //    {
-        //        if( entry.Key == this )
-        //        {
-        //            return entry.Value;
-        //        }
-        //    }
-        //    return null;
-        //}
-
         public void AddAnswer( AnswerBase answerBase )
         {
             this.Parent.Dictionary[this] = answerBase;
