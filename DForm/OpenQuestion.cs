@@ -2,6 +2,7 @@
 
 namespace DForm
 {
+    [Serializable]
     public class OpenQuestion : QuestionBase
     {
         private bool _allowEmptyAnswer;

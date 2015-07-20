@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using DForm;
 
 namespace DForm
 {
-    public class Form : ICloneable, ITitle
+    [Serializable]
+    public class Form : ITitle
     {
         public Questions Questions;
-        private List<FormAnswer> _formAnswer;
+        readonly List<FormAnswer> _formAnswer;
         private string title;
 
         public Form()
@@ -18,16 +23,16 @@ namespace DForm
         public FormAnswer FindOrCreateAnswer( string answerTitle )
         {
             if( answerTitle == null ) throw new ArgumentNullException();
-            foreach( FormAnswer answer in _formAnswer )
+            foreach( FormAnswer formAnswer in _formAnswer )
             {
-                if( answer.UniqueName == answerTitle )
+                if( formAnswer.UniqueName == answerTitle )
                 {
-                    return answer;
+                    return formAnswer;
                 }
             }
-            FormAnswer formAnswer = new FormAnswer( answerTitle, this );
-            _formAnswer.Add( formAnswer );
-            return formAnswer;
+            var newFormAnswer = new FormAnswer( answerTitle, this );
+            _formAnswer.Add( newFormAnswer );
+            return newFormAnswer;
         }
 
         public int AnswerCount
@@ -51,23 +56,13 @@ namespace DForm
         public List<FormAnswer> ListOfFormAnswer
         {
             get { return _formAnswer; }
-            set
-            {
-                _formAnswer = value;
-            }
         }
 
-        private object ShallowCopy()
+        public Form CloneSerializableObject( Form @this )
         {
-            return this.MemberwiseClone();
-        }
-
-        public object Clone()
-        {
-            Form cloned = (Form)this.ShallowCopy();
-            cloned.ListOfFormAnswer = new List<FormAnswer>();
+            Form cloned = TypeExtensions.CloneSerializableObject( this );
+            cloned.ListOfFormAnswer.Clear();
             return cloned;
         }
-
     }
 }

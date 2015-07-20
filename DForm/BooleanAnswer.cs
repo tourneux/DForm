@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Web;
 
 namespace DForm
 {
+    [Serializable]
     public class BooleanAnswer : AnswerBase
     {
         private bool _allowEmptyAnswer;

@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Web;
 
 namespace DForm
 {
+    [Serializable]
     public class OpenAnswer : AnswerBase
     {
         private string _freeAnswer;

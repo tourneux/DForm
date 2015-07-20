@@ -3,20 +3,39 @@ using System.Collections.Generic;
 
 namespace DForm
 {
+    [Serializable]
     public class FormAnswer
     {
         private string _uniqueName;
         private Form Form;
+        private Dictionary<QuestionBase, AnswerBase> dictionaryQuestionAnswer;
 
         public FormAnswer( string answerTitle, Form form )
         {
             _uniqueName = answerTitle;
             Form = form;
+            dictionaryQuestionAnswer = new Dictionary<QuestionBase, AnswerBase>();
         }
-    
+
+        public Dictionary<QuestionBase, AnswerBase> Dictionary
+        {
+            get { return dictionaryQuestionAnswer; }
+        }
+
         public AnswerBase FindAnswer( QuestionBase questionBase )
         {
-            return questionBase.FindAnswer();
+            if( this.dictionaryQuestionAnswer.Count != this.Form.Questions.Dictionary.Count )
+            {
+                this.dictionaryQuestionAnswer = this.Form.Questions.Dictionary;
+            }
+            foreach( KeyValuePair<QuestionBase, AnswerBase> entry in dictionaryQuestionAnswer )
+            {
+                if( entry.Key == questionBase )
+                {
+                    return entry.Value;
+                }
+            }
+            return null;
         }
 
         public AnswerBase AddAnswerFor( QuestionBase questionBase )
@@ -25,7 +44,7 @@ namespace DForm
             anwserBase.Title = questionBase.Title;
             anwserBase.Index = questionBase.Index;
             anwserBase.Parent = questionBase.Parent;
-            questionBase.AddAnswer( anwserBase );
+            this.dictionaryQuestionAnswer[questionBase] =  anwserBase ;
             return anwserBase;
         }
 

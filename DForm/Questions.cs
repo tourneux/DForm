@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Web;
-using System.ComponentModel;
 using System.Collections.Generic;
-using System.Data.Linq.Mapping;
+//using System.Data.Linq.Mapping;
 
 namespace DForm
 {
-    [Table( Name = "DVDTable" )]
+    //[Table( Name = "DVDTable" )]
+    [Serializable]
     public class Questions : QuestionBase
     {
         private string title;
@@ -45,6 +44,16 @@ namespace DForm
             QuestionBase qb = (QuestionBase)Activator.CreateInstance( t );
             qb.Index = _currentIndex++;
             this.Dictionary.Add( qb, null );
+
+            if( this.Form.ListOfFormAnswer.Count != 0 )
+            {
+                List<FormAnswer> list = this.Form.ListOfFormAnswer;
+
+                foreach( var tmp in list )
+                {
+                    tmp.Dictionary.Add( qb, null );
+                }
+            }
             qb.Parent = this;
             return qb;
         }

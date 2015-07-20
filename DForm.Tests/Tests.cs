@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using DForm;
+using System.Linq;
 
 namespace DForm.Tests
 {
@@ -67,6 +67,11 @@ namespace DForm.Tests
 
             FormAnswer a = f.FindOrCreateAnswer( "Emilie" );
             Assert.IsNotEmpty( f.ListOfFormAnswer );
+
+            BooleanQuestion qBool = (BooleanQuestion)f.Questions.AddNewQuestion( typeof( BooleanQuestion ) );
+            qBool.Title = "Second Question in the world!";
+            qBool.AllowEmptyAnswer = false;
+
             AnswerBase theAnswerOfEmilieToQOpen = a.FindAnswer( qOpen );
             if( theAnswerOfEmilieToQOpen == null )
             {
@@ -76,11 +81,6 @@ namespace DForm.Tests
 
             OpenAnswer emilieAnswer = (OpenAnswer)theAnswerOfEmilieToQOpen;
             emilieAnswer.FreeAnswer = "I am very happy to be here";
-
-
-            BooleanQuestion qBool = (BooleanQuestion)f.Questions.AddNewQuestion( typeof( BooleanQuestion ) );
-            qBool.Title = "Second Question in the world!";
-            qBool.AllowEmptyAnswer = false;
 
             AnswerBase theAnswerOfEmilieToQBoolean = a.FindAnswer( qBool );
             if( theAnswerOfEmilieToQBoolean == null )
@@ -101,7 +101,7 @@ namespace DForm.Tests
         }
 
         [Test]
-        public void Blank()
+        public void SerializableObject()
         {
             Form f = new Form();
             f.Title = "Prem's";
@@ -125,8 +125,8 @@ namespace DForm.Tests
             Assert.AreEqual( 0, q2Bool.Index );
             Assert.IsTrue( f.Questions.Contains( qBool ) );
 
-            Form formBlank = (Form)f.Clone();
-            formBlank.Title = "je suis un clone";
+            Form formBlank = f.CloneSerializableObject( f );
+            formBlank.Title = "je suis un clone mais avec liste de FormAnswer vide !!!!!";
             Assert.IsEmpty( formBlank.ListOfFormAnswer );
             Assert.AreNotSame( f, formBlank );
 
@@ -161,6 +161,78 @@ namespace DForm.Tests
             emilieAnswerBool2.BoolAnswer = false;
 
             Assert.IsEmpty( formBlank.ListOfFormAnswer );
+            Assert.IsNotEmpty( f.ListOfFormAnswer );
+        }
+
+        [Test]
+        public void Linq()
+        {
+            Form f = new Form();
+            f.Title = "Prem's";
+
+            OpenQuestion qOpen = (OpenQuestion)f.Questions.AddNewQuestion( typeof( OpenQuestion ) );
+            qOpen.Title = "First Question in the world!";
+            qOpen.AllowEmptyAnswer = false;
+
+            FormAnswer a = f.FindOrCreateAnswer( "Emilie" );
+            Assert.IsNotEmpty( f.ListOfFormAnswer );
+
+            BooleanQuestion qBool = (BooleanQuestion)f.Questions.AddNewQuestion( typeof( BooleanQuestion ) );
+            qBool.Title = "Second Question in the world!";
+
+            BooleanQuestion q2Bool = (BooleanQuestion)f.Questions.AddNewQuestion( typeof( BooleanQuestion ) );
+            q2Bool.Title = "Third Question in the world!";
+
+            Assert.AreEqual( 0, qOpen.Index );
+            Assert.AreEqual( 1, qBool.Index );
+            Assert.AreEqual( 2, q2Bool.Index );
+            Assert.IsTrue( f.Questions.Contains( qBool ) );
+
+            /* Création des réponses */
+            AnswerBase theAnswerOfEmilieToQOpen = a.FindAnswer( qOpen );
+            if( theAnswerOfEmilieToQOpen == null )
+            {
+                theAnswerOfEmilieToQOpen = a.AddAnswerFor( qOpen );
+            }
+            Assert.IsInstanceOf( typeof( OpenAnswer ), theAnswerOfEmilieToQOpen );
+            OpenAnswer emilieAnswer = (OpenAnswer)theAnswerOfEmilieToQOpen;
+            emilieAnswer.FreeAnswer = "I am very happy to be here";
+            //
+            AnswerBase theAnswerOfEmilieToQBool = a.FindAnswer( qBool );
+            if( theAnswerOfEmilieToQBool == null )
+            {
+                theAnswerOfEmilieToQBool = a.AddAnswerFor( qBool );
+            }
+            Assert.IsInstanceOf( typeof( BooleanAnswer ), theAnswerOfEmilieToQBool );
+            BooleanAnswer emilieAnswerBool = (BooleanAnswer)theAnswerOfEmilieToQBool;
+            emilieAnswerBool.BoolAnswer = true;
+            //
+            AnswerBase theAnswerOfEmilieToQBool2 = a.FindAnswer( q2Bool );
+            if( theAnswerOfEmilieToQBool2 == null )
+            {
+                theAnswerOfEmilieToQBool2 = a.AddAnswerFor( q2Bool );
+            }
+            Assert.IsInstanceOf( typeof( BooleanAnswer ), theAnswerOfEmilieToQBool2 );
+
+            BooleanAnswer emilieAnswerBool2 = (BooleanAnswer)theAnswerOfEmilieToQBool2;
+            emilieAnswerBool2.BoolAnswer = false;
+
+            var answerTitle = f.Questions.Dictionary
+                                   .Select( i => i.Value )
+                                   .OfType<BooleanAnswer>()
+                                   .Where( d => d.BoolAnswer == false )
+                                   .SelectMany( g => g.Title );
+
+            Assert.AreEqual( answerTitle, "Third Question in the world!" );
+
+            var answerIndex = f.Questions.Dictionary
+                                .Select( i => i.Value )
+                                .OfType<BooleanAnswer>()
+                                .Where( i => i.Index == 2 )
+                                .Select( h => h.Index ).FirstOrDefault();
+
+            Assert.AreEqual( 2, answerIndex );
+
             Assert.IsNotEmpty( f.ListOfFormAnswer );
         }
 

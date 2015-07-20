@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace DForm
 {
@@ -134,28 +136,24 @@ namespace DForm
             set { _title = value;  }
         }
 
-        //public abstract QuestionBase AddNewQuestion( string type );
-
-        //public abstract QuestionBase AddNewQuestion( Type t );
-
         public Dictionary<QuestionBase, AnswerBase> Dictionary
         {
             get { return dictionary; }
         }
 
-        public AnswerBase FindAnswer()
-        {
-            Dictionary<QuestionBase, AnswerBase> dictionary = this._parent.Dictionary;
+        //public AnswerBase FindAnswer()
+        //{
+        //    Dictionary<QuestionBase, AnswerBase> dictionary = this._parent.Dictionary;
 
-            foreach( KeyValuePair<QuestionBase, AnswerBase> entry in dictionary )
-            {
-                if( entry.Key == this )
-                {
-                    return entry.Value;
-                }
-            }
-            return null;
-        }
+        //    foreach( KeyValuePair<QuestionBase, AnswerBase> entry in dictionary )
+        //    {
+        //        if( entry.Key == this )
+        //        {
+        //            return entry.Value;
+        //        }
+        //    }
+        //    return null;
+        //}
 
         public void AddAnswer( AnswerBase answerBase )
         {

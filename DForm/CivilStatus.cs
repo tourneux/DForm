@@ -2,6 +2,7 @@
 
 namespace DForm
 {
+    [Serializable]
     public class CivilStatus
     {
         public int FirstName

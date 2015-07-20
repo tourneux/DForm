@@ -2,6 +2,7 @@
 
 namespace DForm
 {
+    [Serializable]
     public class BooleanQuestion : QuestionBase
     {
         private bool _allowEmptyAnswer;

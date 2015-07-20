@@ -1,7 +1,11 @@
 C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm\bin\Debug\DForm.dll.config
 C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm\bin\Debug\DForm.dll
 C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm\bin\Debug\DForm.pdb
+C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm\bin\Debug\EntityFramework.dll
+C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm\bin\Debug\nunit.framework.dll
+C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm\bin\Debug\EntityFramework.xml
+C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm\bin\Debug\nunit.framework.xml
 C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm\obj\Debug\DForm.dll
 C:\Users\Haplo\Desktop\Info\Csharp\DForm\DForm\obj\Debug\DForm.pdb
