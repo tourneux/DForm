@@ -257,17 +257,25 @@ namespace DForm.Tests
             BooleanQuestion q2Bool = (BooleanQuestion)f.Questions.AddNewQuestion( typeof( BooleanQuestion ) );
             q2Bool.Title = "Third Question in the world!";
 
-            //qBool.Parent = qOpen;
-            //q2Bool.Parent = qBool;
+            qBool.Parent = qOpen;
+            q2Bool.Parent = qBool;
 
             XElement e = f.Questions.ToXml();
 
             var result = @"
                 <Questions Title=""Prem's"">
-                    <NumberOfQuestions Count=""3"">
-                        <QuestionBase>First Question in the world!</QuestionBase> 
-                        <QuestionBase>Second Question in the world!</QuestionBase> 
-                        <QuestionBase>Third Question in the world!</QuestionBase> 
+                    <NumberOfQuestions Count=""1"">
+                        <QuestionBase Title=""First Question in the world!"">
+                            <Child Count=""1"">
+                                <QuestionBase Title=""Second Question in the world!"">
+                                    <Child Count=""1"">
+                                        <QuestionBase Title=""Third Question in the world!"">
+                                            <Child Count=""0"" /> 
+                                        </QuestionBase>
+                                    </Child>
+                                </QuestionBase>
+                            </Child>
+                        </QuestionBase>
                     </NumberOfQuestions>
                 </Questions>";
             var eTest = XElement.Parse( result );

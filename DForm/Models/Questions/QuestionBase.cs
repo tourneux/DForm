@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.Xml.Linq;
+using System.Linq;
 
 namespace DForm
 {
@@ -160,6 +162,15 @@ namespace DForm
             }
             while( qb.Parent.Parent != null );
             qb.Parent.Dictionary.Remove( this );
+        }
+
+        public XElement ToXml()
+        {
+            return new XElement( "QuestionBase", new XAttribute( "Title", _title ),
+                       new XElement( "Child", new XAttribute( "Count", Dictionary.Count ),
+                            Dictionary
+                               .OrderBy( i => i.Key.Index )
+                               .Select( i => (i.Key == null) ? null : i.Key.ToXml() ) ) );
         }
     }
 }
