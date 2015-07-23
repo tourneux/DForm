@@ -257,6 +257,9 @@ namespace DForm.Tests
             BooleanQuestion q2Bool = (BooleanQuestion)f.Questions.AddNewQuestion( typeof( BooleanQuestion ) );
             q2Bool.Title = "Third Question in the world!";
 
+            //qBool.Parent = qOpen;
+            //q2Bool.Parent = qBool;
+
             XElement e = f.Questions.ToXml();
 
             var result = @"
